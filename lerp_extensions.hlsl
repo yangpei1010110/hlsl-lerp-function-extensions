@@ -10,86 +10,122 @@
 #define real4 float4
 #endif
 
-real lerp(real lxly, real hxly, real lxhy, real hxhy,
+real lerp(real d00,
+          real d10,
+          real d01,
+          real d11,
           real2 tPos)
 {
     return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
+        lerp(d00, d10, tPos.x),
+        lerp(d01, d11, tPos.x),
         tPos.y
     );
 }
 
-real2 lerp(real2 lxly, real2 hxly, real2 lxhy, real2 hxhy,
+real2 lerp(real2 d00,
+           real2 d10,
+           real2 d01,
+           real2 d11,
            real2 tPos)
 {
     return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
+        lerp(d00, d10, tPos.x),
+        lerp(d01, d11, tPos.x),
         tPos.y
     );
 }
 
-real3 lerp(real3 lxly, real3 hxly, real3 lxhy, real3 hxhy,
+real3 lerp(real3 d00,
+           real3 d10,
+           real3 d01,
+           real3 d11,
            real2 tPos)
 {
     return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
+        lerp(d00, d10, tPos.x),
+        lerp(d01, d11, tPos.x),
         tPos.y
     );
 }
 
-real4 lerp(real4 lxly, real4 hxly, real4 lxhy, real4 hxhy,
+real4 lerp(real4 d00,
+           real4 d10,
+           real4 d01,
+           real4 d11,
            real2 tPos)
 {
     return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
+        lerp(d00, d10, tPos.x),
+        lerp(d01, d11, tPos.x),
         tPos.y
     );
 }
 
-real lerp(real lxlylz, real hxlylz, real lxhylz, real hxhylz,
-          real lxlyhz, real hxlyhz, real lxhyhz, real hxhyhz,
+real lerp(real d000,
+          real d100,
+          real d010,
+          real d110,
+          real d001,
+          real d101,
+          real d011,
+          real d111,
           real3 tPos)
 {
     return lerp(
-        lerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        lerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
+        lerp(d000, d100, d010, d110, tPos.xy),
+        lerp(d001, d101, d011, d111, tPos.xy),
         tPos.z
     );
 }
 
-real2 lerp(real2 lxlylz, real2 hxlylz, real2 lxhylz, real2 hxhylz,
-           real2 lxlyhz, real2 hxlyhz, real2 lxhyhz, real2 hxhyhz,
+real2 lerp(real2 d000,
+           real2 d100,
+           real2 d010,
+           real2 d110,
+           real2 d001,
+           real2 d101,
+           real2 d011,
+           real2 d111,
            real3 tPos)
 {
     return lerp(
-        lerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        lerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
+        lerp(d000, d100, d010, d110, tPos.xy),
+        lerp(d001, d101, d011, d111, tPos.xy),
         tPos.z
     );
 }
 
-real3 lerp(real3 lxlylz, real3 hxlylz, real3 lxhylz, real3 hxhylz,
-           real3 lxlyhz, real3 hxlyhz, real3 lxhyhz, real3 hxhyhz,
+real3 lerp(real3 d000,
+           real3 d100,
+           real3 d010,
+           real3 d110,
+           real3 d001,
+           real3 d101,
+           real3 d011,
+           real3 d111,
            real3 tPos)
 {
     return lerp(
-        lerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        lerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
+        lerp(d000, d100, d010, d110, tPos.xy),
+        lerp(d001, d101, d011, d111, tPos.xy),
         tPos.z
     );
 }
 
-real4 lerp(real4 lxlylz, real4 hxlylz, real4 lxhylz, real4 hxhylz,
-           real4 lxlyhz, real4 hxlyhz, real4 lxhyhz, real4 hxhyhz,
+real4 lerp(real4 d000,
+           real4 d100,
+           real4 d010,
+           real4 d110,
+           real4 d001,
+           real4 d101,
+           real4 d011,
+           real4 d111,
            real3 tPos)
 {
     return lerp(
-        lerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        lerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
+        lerp(d000, d100, d010, d110, tPos.xy),
+        lerp(d001, d101, d011, d111, tPos.xy),
         tPos.z
     );
 }
@@ -111,115 +147,27 @@ real3 smoothstep01(real3 tPos)
 
 real4 smoothstep01(real4 tPos)
 {
-    return tPos * tPos * (3. - (2. * tPos));
+    return tPos * tPos * tPos * (tPos * (tPos * 6. - 15.) + 10.);
 }
 
-real smoothlerp(real lxly, real hxly, real tPos)
+real smootherstep01(real tPos)
 {
-    return lerp(lxly, hxly, smoothstep01(tPos));
+    return tPos * tPos * tPos * (tPos * (tPos * 6. - 15.) + 10.);
 }
 
-real2 smoothlerp(real2 lxly, real2 hxly, real tPos)
+real2 smootherstep01(real2 tPos)
 {
-    return lerp(lxly, hxly, smoothstep01(tPos));
+    return tPos * tPos * tPos * (tPos * (tPos * 6. - 15.) + 10.);
 }
 
-real3 smoothlerp(real3 lxly, real3 hxly, real tPos)
+real3 smootherstep01(real3 tPos)
 {
-    return lerp(lxly, hxly, smoothstep01(tPos));
+    return tPos * tPos * tPos * (tPos * (tPos * 6. - 15.) + 10.);
 }
 
-real4 smoothlerp(real4 lxly, real4 hxly, real tPos)
+real4 smootherstep01(real4 tPos)
 {
-    return lerp(lxly, hxly, smoothstep01(tPos));
-}
-
-real smoothlerp(real lxly, real hxly, real lxhy, real hxhy,
-                real2 tPos)
-{
-    tPos = smoothstep01(tPos);
-    return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
-        tPos.y
-    );
-}
-
-real2 smoothlerp(real2 lxly, real2 hxly, real2 lxhy, real2 hxhy,
-                 real2 tPos)
-{
-    tPos = smoothstep01(tPos);
-    return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
-        tPos.y
-    );
-}
-
-real3 smoothlerp(real3 lxly, real3 hxly, real3 lxhy, real3 hxhy,
-                 real2 tPos)
-{
-    tPos = smoothstep01(tPos);
-    return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
-        tPos.y
-    );
-}
-
-real4 smoothlerp(real4 lxly, real4 hxly, real4 lxhy, real4 hxhy,
-                 real2 tPos)
-{
-    tPos = smoothstep01(tPos);
-    return lerp(
-        lerp(lxly, hxly, tPos.x),
-        lerp(lxhy, hxhy, tPos.x),
-        tPos.y
-    );
-}
-
-real smoothlerp(real lxlylz, real hxlylz, real lxhylz, real hxhylz,
-                real lxlyhz, real hxlyhz, real lxhyhz, real hxhyhz,
-                real3 tPos)
-{
-    return smoothlerp(
-        smoothlerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        smoothlerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
-        smoothstep01(tPos.z)
-    );
-}
-
-real2 smoothlerp(real2 lxlylz, real2 hxlylz, real2 lxhylz, real2 hxhylz,
-                 real2 lxlyhz, real2 hxlyhz, real2 lxhyhz, real2 hxhyhz,
-                 real3 tPos)
-{
-    return smoothlerp(
-        smoothlerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        smoothlerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
-        smoothstep01(tPos.z)
-    );
-}
-
-real3 smoothlerp(real3 lxlylz, real3 hxlylz, real3 lxhylz, real3 hxhylz,
-                 real3 lxlyhz, real3 hxlyhz, real3 lxhyhz, real3 hxhyhz,
-                 real3 tPos)
-{
-    return smoothlerp(
-        smoothlerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        smoothlerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
-        smoothstep01(tPos.z)
-    );
-}
-
-real4 smoothlerp(real4 lxlylz, real4 hxlylz, real4 lxhylz, real4 hxhylz,
-                 real4 lxlyhz, real4 hxlyhz, real4 lxhyhz, real4 hxhyhz,
-                 real3 tPos)
-{
-    return smoothlerp(
-        smoothlerp(lxlylz, hxlylz, lxhylz, hxhylz, tPos.xy),
-        smoothlerp(lxlyhz, hxlyhz, lxhyhz, hxhyhz, tPos.xy),
-        smoothstep01(tPos.z)
-    );
+    return tPos * tPos * tPos * (tPos * (tPos * 6. - 15.) + 10.);
 }
 
 #endif
